@@ -7,7 +7,7 @@ if (typeof global === 'undefined') {
 
 const connectWebSocket = (onMessageReceived) => {
     const client = new Client({
-        brokerURL: "ws://localhost:8080/identity/ws", // Kết nối WebSocket
+        brokerURL: "ws://localhost:8081/identity/ws", // Kết nối WebSocket
         connectHeaders: {},
         debug: function (str) {
             console.log(str);
@@ -20,7 +20,7 @@ const connectWebSocket = (onMessageReceived) => {
                     const parsedMessage = JSON.parse(message.body);
                     onMessageReceived(parsedMessage);
                 } catch (e) {
-                    console.error("Failed to parse message as JSON:", e);
+                 //   console.error("Failed to parse message as JSON:", e);
                     onMessageReceived(message.body); // Xử lý như một chuỗi thông thường
                 }
             });
@@ -30,7 +30,7 @@ const connectWebSocket = (onMessageReceived) => {
         },
     });
 
-    client.activate();
+    client.activate(); // bat dau qua trinh ket noi voi server websocket ta
 };
 
 export default connectWebSocket;
